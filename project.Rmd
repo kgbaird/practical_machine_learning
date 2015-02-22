@@ -171,3 +171,22 @@ confusionMatrix(predictionsB1, myTesting$classe)
 
 ## Conclusion
 Examining the accuracy of the two methods shows that the Random Forest predicted with higher accuracy.  Thus, we will apply it to make the predictions for submission.
+
+### Generate predictions:
+```{r}
+predictionsB2 <- predict(modFitB1, testing, type = "class")
+```
+
+### Generate files for submission
+```{r}
+
+pml_write_files = function(x){
+  n = length(x)
+  for(i in 1:n){
+    filename = paste0("problem_id_",i,".txt")
+    write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
+  }
+}
+
+pml_write_files(predictionsB2)
+```
